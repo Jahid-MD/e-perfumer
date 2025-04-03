@@ -1,11 +1,29 @@
-name: Greeting
+name: Deploying
 on: [push, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
+        uses: actions/checkout@v4
+        # run: |
+        #   echo "cloning repo.."
+        #   echo "${{toJson(github)}}"
+        #   git clone https://github.com/${{github.repository}}.git
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: print node vesrion
         run: |
-          echo "cloning repo.."
-          echo "${{toJson(github)}}"
-          git clone https://github.com/${{github.repository}}.git
+          echo "node version:"
+          node -v
+      - name: Install Dependencies
+        run: |
+          echo "Installing dependencies.."
+          npm install ci
+      - name: Run Tests
+        run: |
+          echo "Running tests.."
+          npm run test        
