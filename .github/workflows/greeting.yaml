@@ -5,4 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Greet
-        run: echo "Hello, World!"
+        run: echo "Hello, World! From GitHub Actions"
+      - name: Greet with Name
+        run: echo "Hello, ${{ github.actor }}! From GitHub Actions"
